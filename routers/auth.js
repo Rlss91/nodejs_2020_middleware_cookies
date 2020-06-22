@@ -20,4 +20,8 @@ router.post("/login", (req, res) => {
   if (!sent) res.json({ err: "us or ps incorrect" });
 });
 
+router.get("/calc", (req, res) => {
+  res.json({ msg: "calc from auth" });
+});
+
 module.exports = router;
