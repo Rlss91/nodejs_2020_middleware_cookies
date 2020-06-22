@@ -6,11 +6,15 @@ function fetch_post(url = ``, data = {}) {
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
     credentials: "same-origin", // include, *same-origin, omit
     headers: {
+      gfdgfd: "342235764534",
       "Content-Type": "application/json",
       // "Content-Type": "application/x-www-form-urlencoded",
     },
     redirect: "follow", // manual, *follow, error
     referrer: "no-referrer", // no-referrer, *client
     body: JSON.stringify(data), // body data type must match "Content-Type" header
-  }).then((response) => response.json()); // parses response to JSON
+  }).then((response) => {
+    console.log(response.headers.entries());
+    return response.json();
+  }); // parses response to JSON
 }

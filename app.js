@@ -5,6 +5,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 
 const authMiddleware = require("./middleware/auth");
+const authRouter = require("./routers/auth");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static("public"));
+
+app.use("/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -37,22 +40,18 @@ app.post("/", (req, res) => {
     res.json({ num: num, arr: arrnum });
   }
 });
-let dbobj = {
-  james: "1",
-  sten: "2",
-};
-app.post("/auth/login", (req, res) => {
-  let { us, ps } = req.body;
-  let sent = false;
-  if (us && ps) {
-    if (dbobj[us]) {
-      if (dbobj[us] == ps) {
-        sent = true;
-        res.cookie("ok", "ok", { maxAge: 500000 }).json({ msg: "connected" });
-      }
-    }
-  }
-  if (!sent) res.json({ err: "us or ps incorrect" });
+
+app.post("/test", (req, res) => {
+  // res.setHeader("my header", "my data");
+  console.log(req.headers);
+  res.setHeader("asdfsd", "fawegweg");
+  // console.log(req.query);
+  res.json("ok");
+});
+
+app.post("/altlogin", (req, res) => {
+  res.setHeader("token", "764654356");
+  res.json("ok");
 });
 
 app.listen(PORT, () => {

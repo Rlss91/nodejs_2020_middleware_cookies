@@ -8,9 +8,17 @@ async function handleBtnClick() {
     if (data.err) {
       div.innerHTML = "something went wrong";
     } else {
-      window.location.href = "http://localhost:3000/numbers";
+      // window.location.href = "http://localhost:3000/numbers";
     }
     console.log(data);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function handleBtnClickH() {
+  try {
+    await fetch_post("http://localhost:3000/altlogin");
   } catch (e) {
     console.log(e);
   }
